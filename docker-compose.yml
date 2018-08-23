@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  restapi:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      MYSQL_URL: 'mysql+pymysql://test:user_pass@mysql/test'
+      PYTHONPATH: '/usr/src/app'
+    command: python /usr/src/app/app.py
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root_pass'
+      MYSQL_DATABASE: 'test'
+      MYSQL_USER: 'test'
+      MYSQL_PASSWORD: 'user_pass'
+    ports:
+      - "3306:3306"
